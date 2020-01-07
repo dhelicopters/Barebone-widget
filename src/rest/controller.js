@@ -1,6 +1,6 @@
-const express       = require('express');
-const fs            = require('fs');
-                      require('dotenv').config();
+const express = require('express');
+const fs = require('fs');
+require('dotenv').config();
 
 const controller = express.Router();
 
@@ -42,11 +42,9 @@ controller.get('/:userId', async (req, res, next) => {
     }
 });
 
-
 // Below you can add your own endpoints that your widget uses to get data to display.
 controller.get('/:userId/html', async (req, res, next) => {
     try {
-
         const html = `<p>Here you can write your HTML</p>`;
         res.set('Content-Type', 'text/html');
         return res.send(html);

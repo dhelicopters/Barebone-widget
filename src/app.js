@@ -1,24 +1,24 @@
-const express           = require('express');
-const bodyParser        = require('body-parser');
-const http              = require('http');
-const Ws                = require('ws');
-const cors              = require('cors');
-const controller        = require('./rest/controller');
-                          require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const http = require('http');
+const Ws = require('ws');
+const cors = require('cors');
+const controller = require('./rest/controller');
+require('dotenv').config();
 
-const httpServer        = http.createServer();
-const app               = express();
+const httpServer = http.createServer();
+const app = express();
 
 // Holds the (websocket) clients that are going to connect with your widget.
 const clients = {};
 
 // Values from the .env file.
-const {WEBSOCKET_SERVER_ADDRESS, HTTP_PORT} = process.env;
+const { WEBSOCKET_SERVER_ADDRESS, HTTP_PORT } = process.env;
 
 httpServer.on('request', app);
 
 app.use(bodyParser.json());
-app.use(cors({origin: true, credentials: true}));
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.static('public'));
 
 // Middleware function to bind the clients to the request.
@@ -87,12 +87,12 @@ const setupConnection = () => {
             resolve(wsClient);
         });
 
-        wsClient.on('message', (event) => {
+        wsClient.on('message', event => {
             const message = JSON.parse(event);
             // The message has a field called bioData which holds the biometric data and the userId of the person to which this data belongs.
 
             // An example of getting these values is described below
-            const {userId, voice} = message.bioData;
+            const { userId, voice } = message.bioData;
 
             // TODO: Implement your own logic here to use the given command as you please.
         });

@@ -4,7 +4,7 @@
 const userId = window.location.pathname.replace('/', '');
 const { host } = window.location;
 
-async function updateScreen () {
+async function updateScreen() {
     // you can use this method to call the widget backend and if everything succeeds
     // load the HTML into the frontend by setting the innerHTML of an element in your HTML template
 }
@@ -28,6 +28,7 @@ const wsClient = () => {
         switch (message.type) {
             case 'UPDATE_SOMETHING':
                 // For example, you can fetch new stuff to be displayed on your frontend based
+                updateScreen();
                 break;
             default:
                 return;

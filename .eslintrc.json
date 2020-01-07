@@ -1,0 +1,48 @@
+{
+    "extends": ["airbnb", "prettier", "plugin:node/recommended"],
+    "plugins": ["prettier"],
+    "rules": {
+      "prettier/prettier": "error",
+      "no-unused-vars": "warn",
+      "no-console": "off",
+      "no-process-exit": "off",
+      "no-param-reassign": "off",
+      "no-underscore-dangle": "off",
+      "no-undef": "off",
+      "no-plusplus": "off",
+      "no-useless-return": "off",
+      "no-async-promise-executor": "off",
+      "no-await-in-loop": "off",
+      "no-restricted-syntax": "off",
+      "no-use-before-define": "warn",
+      "no-shadow": "warn",
+      "no-return-await": "off",
+      "func-names": "off",
+      "object-shorthand": "off",
+      "class-methods-use-this": "off",
+      "consistent-return": "off",
+      "node/no-unpublished-require": "off",
+      "prefer-rest-params": "off",
+      "node/no-unsupported-features/es-syntax": "off",
+      "import/no-extraneous-dependencies": "warn",
+      "global-require": "warn",
+      "quotes": [2, "single", { 
+        "avoidEscape": true, 
+        "allowTemplateLiterals": true 
+      }],
+      "comma-dangle": ["error", {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }], 
+      "no-magic-numbers": ["error", { 
+        "enforceConst": true, 
+        "ignore": [ -1, 0, 1, 200, 201, 400, 404, 500 ] 
+      }]
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    }
+}
