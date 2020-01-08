@@ -4,6 +4,7 @@ const http = require('http');
 const Ws = require('ws');
 const cors = require('cors');
 const controller = require('./rest/controller');
+const { sentenceContainsWord, commandWords } = require('./util/voiceHelper');
 require('dotenv').config();
 
 const httpServer = http.createServer();
@@ -94,7 +95,17 @@ const setupConnection = () => {
             // An example of getting these values is described below
             const { userId, voice } = message.bioData;
 
-            // TODO: Implement your own logic here to use the given command as you please.
+            // Check if the command received includes the words you want your widget to respond to
+            if (sentenceContainsWord(voice, commandWords, false)) {
+                const client = clients[userId];
+
+                // If a client has a socket, send a message to the frontend of your widget so it can update it's content
+                if (client.socket) {
+                    client.socket.send(
+                        JSON.stringify({ type: 'THE UPDATE MESSAGE YOU WANT YOUR FRONTEND TO RESPOND TO' })
+                    );
+                }
+            }
         });
 
         wsClient.on('close', event => {
@@ -116,3 +127,5 @@ httpServer.listen(HTTP_PORT, async () => {
     await setupConnection();
     console.log(`http server listening on port: ${HTTP_PORT}`);
 });
+
+
