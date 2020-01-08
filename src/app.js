@@ -83,6 +83,8 @@ const setupConnection = () => {
                     sub_face: false,
                     sub_gesture: false,
                     sub_voice: true,
+                    sub_age: false,
+                    sub_gender: false,
                 })
             );
             resolve(wsClient);
