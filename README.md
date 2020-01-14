@@ -5,7 +5,7 @@ developers een skelet om zelf hun widgets te ontwerpen en implementeren voor de 
 
 # Omschrijving
 
-De barebone is als volgt opgesteld om als widget te kunnen dienen als skelet:
+De barebone is als volgt opgesteld om een skelet te vormen voor een developer die zijn of haar eigen widget(s) wil schrijven voor de Takahe Magic Mirror.
 
 - De barebone widget is geschreven als kleine Express applicatie.
 - De barebone widget is een volwaardige website inclusief front- en backend.
