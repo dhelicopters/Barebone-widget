@@ -1,36 +1,36 @@
 # Barebone widget
 
-Deze readme geeft overzicht over de architectuur van de barebone widget behorende bij de Takahe Magic Mirror. Deze barebone widget geeft
-developers een skelet om zelf hun widgets te ontwerpen en implementeren voor de Takahe Magic Mirror opdracht.
+This readme supplies an overview concerning the architecture and operation of the barebone widget belonging to the Takahe Magic Mirror project. This barebone
+widget provides developers with a skeleton to design and implement widgets to be shown on the Takahe Magic Mirror. 
 
-# Omschrijving
+# Description
 
-De barebone is als volgt opgesteld om een skelet te vormen voor een developer die zijn of haar eigen widget(s) wil schrijven voor de Takahe Magic Mirror.
+The barebone is created as follows, with the intension of being a skeleton for a developer who whishes to create his or her own widgets for the Takahe Magic Mirror. 
 
-- De barebone widget is geschreven als kleine Express applicatie.
-- De barebone widget is een volwaardige website inclusief front- en backend.
-- De barebone widget kan zich subscriben op biometrische data die door de Takahe Magic Mirror wordt gegenereerd.
-- De barebone widget maakt gebruik van websockets om de frontend te kunnen notificeren over gewijzigde data die gepulled moet worden.
-- De barebone widget maakt de volledige HTML inclusief styling en frontend Javascript beschikbaar aan de Takahe Magic Mirror backend.
+- The barebone widget is written as a small Express application
+- The barebone widget is a standalone website including front- and backend
+- The barebone widget may subscribe itself to biometric information provided by the Takahe Magic Mirror
+- The barebone widget makes uses of the websocket technology to notify it's frontend about data changes that should be displayed
+- The barebone widget exposes it's entire HTML including styling and frontend Javascript to the Takahe Magic Mirror backend
 
-# Architectuur
+# Architecture
 
-![De architectuur](https://i.ibb.co/gzsq32m/Barebone-Widget-2.jpg)
+![The architecture](https://i.ibb.co/gzsq32m/Barebone-Widget-2.jpg)
 
-# Taal
+# Language
 
-De barebone widget is geschreven in nodeJS gebruikmakende van Express om te kunnen fungeren als HTTP server.
+The barebone widget is written in nodeJS using Express to act as an HTTP server.
 
-# Werking
+# Operation
 
-De barebone widget draait als losstaande website en wordt doormiddel van I-frames ingeladen op de Takahe Magic Mirror. Dit zijn
-sandboxed I-frames. Dit betekent dat de widget niet bij parent elementen kan. Houdt hier rekening mee. 
+The barebone widget runs as a standalone website and is loaded in the Magic Mirror through I-frames. These are sandboxed I-frames which
+means the widget can **not** access it's parent elements. Keep this in mind while developing. 
 
-# Biometrische data
+# Biometric data
 
-Het skelet maakt tevens gebruik van websockets (als client) om van biometrische informatie te worden voorzien door de Takahe Magic Mirror. De spiegel verzamelt constant
-informatie over de gebruiker die interactie heeft met de spiegel. Dit gebeurt d.m.v. het pub-sub systeem van de Takahe Magic Mirror, waarbij gesubscribed kan worden
-op biometrische data. Dit gebeurt op de volgende manier:
+The skeleton uses websockets (as a client, receiving messages) to provide itself with biometric data which is supplied by the Takahe Magic Mirror. The mirror gathers biometric data
+of the user standing in front of it on a regular basis. By using the built in pub-sub system belonging to the Takahe Magic Mirror you as developer can subscribe
+on the information relevant for your widget. This happens as follows:
 
 ```javascript
         wsClient.on('open', () => {
@@ -52,29 +52,34 @@ op biometrische data. Dit gebeurt op de volgende manier:
 
 # Websockets
 
-Het skelet maakt in de backend gebruik van websockets om de frontend te notificeren over nieuwe data mits nodig. Dit gebeurt doorgaans wanneer
-de backend van nieuwe biometrische informatie wordt voorzien, zoals bijvoorbeeld een spraakcommando, of het verschijnen van een nieuw/ander gezicht. Met een websocket
-message wordt de frontend verteld om nieuwe informatie te pullen met een fetch commando. 
+The skeleton uses websocket technology to notify the frontend about new data when needed. This usually happens when the Takahe Magic Mirror backend
+receives new biometric data such as voice commands or a newly recognized face. When the widget backend sends a websocket message to the widget frontend,
+the frontend knows when to pull new information from the widget backend using a fetch request for example. 
 
 # Endpoints
 
-De Takahe backend verwacht twee endpoints om de widget aan te kunnen melden
-en de webpagina op te vragen bij de widget. 
+The Takahe Magic Mirror backend expects two endpoints to be able to register the widget and to show the HTML content of the widget/
 
-| Method | Content-Type | URL | Body | Verwachte responsecode | Doel |
+| Method | Content-Type | URL | Body | Expected response code | Goal |
 |:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
-| Post | JSON | '/' | { userId = "5df8aab35fd60a1ad0453a06" } | 201 als alles goed is gegaan. 400 op error. | Het aanmelden van de widget. |
+| Post | JSON | '/' | { userId = "5df8aab35fd60a1ad0453a06" } | 201 OK or 400 in case of an error | To register the widget |
 
-| Method | Content-Type | URL | Body | Verwachte responsecode | Doel |
+| Method | Content-Type | URL | Body | Expected response code | Goal |
 |:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
-| Get | HTML | '/:userId' | De volledige HTML die de widget moet tonen | 200 als alles goed is gegaan. 400 op error | Het providen van de HTML die op de spiegel geladen zal worden |
+| Get | HTML | '/:userId' | The entire widget HTML to be shown | 200 OK or 400 in case of an error | To provide the HTML that is to be shown on the Takahe Magic Mirror |
 
-Het skelet maakt gebruik van een HTML template waarin gemakkelijk eigen HTML ingeladen kan worden. Door het HTML bestand uit het filesystem (de **public** folder) te lezen
-en de {{widgetHTML}} regel te vervangen met de door de developer geschreven HTML, kan gemakkelijk een widget geschreven worden.
+The skeleton uses an HTML template in which replacing content with your own HTML has been made easy. It works by getting the HTML file from the filesystem (using the **public** folder) 
+and replacing the line saying:
 
-Overige endpoints kunnen door de schrijver van de widget naar eigen believe worden geïmplementeerd. Dit skelet bevat een endpoint om de (ruwe) HTML van de widget te tonen, voor testing purposes.
+```{{widgetHTML}}```
 
-# Voorbeeldproject
+by you own HTML. This enables the developer to easily write widgets for the Takahe Magic mirror. 
 
-Een voorbeeld project dat gebruik maakt van deze barebone widget is [hier](https://github.com/nick-caris/moppenTrommel) te vinden.
+The skeleton contains one more endpoint which is used by the widget frontend to display the HTML on it's own frontend. Any further implementation is completely up to you.
+
+
+# Example project
+
+An example project which uses this barebone widget is found [here](https://github.com/nick-caris/moppenTrommel). It's a simple
+implementation of a widget that provides the user of jokes and GIFs using voice commands. 
 
