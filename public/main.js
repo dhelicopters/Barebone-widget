@@ -26,7 +26,7 @@ const wsClient = () => {
         const message = JSON.parse(event.data);
 
         switch (message.type) {
-            case 'UPDATE_SOMETHING':
+            case 'THE UPDATE MESSAGE YOU WANT YOUR FRONTEND TO RESPOND TO':
                 // For example, you can fetch new stuff to be displayed on your frontend based
                 updateScreen();
                 break;
