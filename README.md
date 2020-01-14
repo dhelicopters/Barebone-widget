@@ -15,7 +15,7 @@ De barebone is als volgt opgesteld om als widget te kunnen dienen als skelet:
 
 # Architectuur
 
-![De architectuur](https://i.ibb.co/FKqDRNy/Barebone-Widget-1.jpg)
+![De architectuur](https://i.ibb.co/gzsq32m/Barebone-Widget-2.jpg)
 
 # Taal
 
@@ -63,11 +63,11 @@ en de webpagina op te vragen bij de widget.
 
 | Method | URL | Body | Verwachte responsecode | Doel |
 |------|------|---------|-----------|------|
-| Post (JSON) | '/' | userId = "5df8aab35fd60a1ad0453a06" | 201 als alles goed is gegaan. 400 op error. | Het aanmelden van de widget. |
+| Post (JSON) | '/' | { userId = "5df8aab35fd60a1ad0453a06" } | 201 als alles goed is gegaan. 400 op error. | Het aanmelden van de widget. |
 
 | Method | URL | Body | Verwachte responsecode | Doel |
 |------|------|---------|-----------|------|
-| Get (HTML) | '/:userId' | De HTML van de widget | 200 | Het providen van de HTML die op de spiegel geladen zal worden |
+| Get (HTML) | '/:userId' | De volledige HTML die de widget moet tonen | 200 | Het providen van de HTML die op de spiegel geladen zal worden |
 
 Het skelet maakt gebruik van een HTML template waarin gemakkelijk eigen HTML ingeladen kan worden. Door het HTML bestand uit het filesystem (de **public** folder) te lezen
 en de {{widgetHTML}} regel te vervangen met de door de developer geschreven HTML, kan gemakkelijk een widget geschreven worden.
