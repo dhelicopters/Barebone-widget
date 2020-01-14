@@ -13,7 +13,9 @@ De barebone is als volgt opgesteld om als widget te kunnen dienen als skelet:
 - De barebone widget maakt gebruik van websockets om de frontend te kunnen notificeren over gewijzigde data die gepulled moet worden.
 - De barebone widget maakt de volledige HTML inclusief styling en frontend Javascript beschikbaar aan de Takahe Magic Mirror backend.
 
-![De architectuur](https://i.ibb.co/stkwQHW/Barebone-Widget.jpg)
+# Architectuur
+
+![De architectuur](https://i.ibb.co/FKqDRNy/Barebone-Widget-1.jpg)
 
 # Taal
 
